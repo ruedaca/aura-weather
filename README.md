@@ -1,44 +1,44 @@
-# Aura Weather ☀️🌙
+# Aura Weather
 
-A beautiful React weather application built with Vite, featuring a glassmorphic UI design and dynamic weather illustrations. Search for any city and get real-time weather information with an elegant, responsive interface.
+Una aplicación de clima construida con React, con un diseño glassmorphic e ilustraciones dinámicas del clima. Buscá cualquier ciudad y obtené información meteorológica en tiempo real con una interfaz minimalista y responsiva.
 
-## Features ✨
+## Características
 
-- **Real-time Weather Data** - Integrated with OpenWeatherMap API
-- **Dynamic 3D Illustrations** - Sun, moon, clouds, and animated rain effects
-- **Day/Night Mode** - Automatically switches based on your local timezone
-- **Glassmorphic Design** - Modern, semi-transparent card with backdrop blur
-- **Smooth Animations** - CSS-based animations for weather effects and UI transitions
-- **Responsive Layout** - Centered design that works on all screen sizes
-- **Spanish Language** - Full UI in Spanish with API responses in Spanish
-- **Smart Search** - Auto-capitalizes city names, clears input after search
-- **Loading States** - Animated spinner with visual feedback
+- **Datos de Clima en Tiempo Real** - Integración con la API de OpenWeatherMap
+- **Ilustraciones 3D Dinámicas** - Sol, luna, nubes y efectos de lluvia animada
+- **Modo Día/Noche** - Cambia automáticamente según tu zona horaria local
+- **Diseño Glassmorphic** - Tarjeta moderna semi-transparente con blur de fondo
+- **Animaciones Suaves** - Animaciones CSS para efectos de clima y transiciones de UI
+- **Diseño Responsivo** - Diseño centrado que funciona en todos los tamaños de pantalla
+- **Interfaz en Español** - UI completa en español con respuestas de API en español
+- **Búsqueda Inteligente** - Capitaliza automáticamente nombres de ciudades y limpia entrada
+- **Estados de Carga** - Spinner animado con retroalimentación visual
 
-## Tech Stack 🛠️
+## Stack Tecnológico
 
 - **Frontend**: React 19 + Vite 8
-- **Styling**: Pure CSS with animations
+- **Estilos**: CSS puro con animaciones
 - **API**: OpenWeatherMap 2.5 Weather API
-- **Linting**: ESLint with React Hooks & Refresh
+- **Linting**: ESLint con React Hooks & Refresh
 
-## Getting Started 🚀
+## Comenzar
 
-### Prerequisites
-- Node.js 16+ and npm
+### Requisitos Previos
+- Node.js 16+ y npm
 
-### Installation
+### Instalación
 
 ```bash
 npm install
 ```
 
-### Development
+### Desarrollo
 
 ```bash
 npm run dev
 ```
 
-Open [http://localhost:5173](http://localhost:5173) in your browser.
+Abre [http://localhost:5173](http://localhost:5173) en tu navegador.
 
 ### Build
 
@@ -52,76 +52,68 @@ npm run build
 npm run lint
 ```
 
-## How It Works 📊
+## Cómo Funciona
 
-1. **Search** - Enter any city name in the search bar
-2. **Fetch** - App calls OpenWeatherMap API for weather data
-3. **Display** - Shows temperature, condition, humidity, and wind speed
-4. **Visualize** - Renders dynamic 3D weather illustrations based on conditions
-5. **Adapt** - UI theme changes based on day/night and weather conditions
+1. **Buscar** - Ingresa el nombre de cualquier ciudad en la barra de búsqueda
+2. **Obtener** - La app llama a la API de OpenWeatherMap para obtener datos
+3. **Mostrar** - Muestra temperatura, condición, humedad y velocidad del viento
+4. **Visualizar** - Renderiza ilustraciones dinámicas basadas en las condiciones
+5. **Adaptar** - El tema de la UI cambia según día/noche y condiciones de clima
 
-## Weather Illustrations 🎨
+## Ilustraciones del Clima 
 
-- **Clear Sky** - Sun (day) or Moon (night) ☀️🌙
-- **Cloudy** - Single or multiple cloud layers ☁️
-- **Rain** - Animated rain drops ☔
-- **Thunderstorm** - Rain with dimmed sun/moon ⛈️
-- **Night Clear** - Moon with twinkling stars ⭐
+- **Cielo Despejado** - Sol (día) o Luna (noche) 
+- **Nuboso** - Capas de nubes simples o múltiples 
+- **Lluvia** - Gotas de lluvia animadas 
+- **Tormenta** - Lluvia con sol/luna oscurecidos 
+- **Noche Despejada** - Luna con estrellas titilantes 
 
-## Design Highlights 🎭
+## Detalles del Diseño 
 
-- **Glassmorphism**: Semi-transparent card with 25px blur
-- **Color Scheme**: Light day mode, dark night mode, warm sunny mode
-- **Animations**: 
-  - Sun glimmer effect
-  - Moon glow effect
-  - Rain drop cascade
-  - Star twinkle effect
-  - Cloud fade-in
-  - Loading spinner
-  - UI transitions
+- **Glassmorphism**: Tarjeta semi-transparente con blur de 25px
+- **Esquema de Colores**: Modo día claro, modo noche oscuro, modo día soleado cálido
+- **Animaciones**: 
+  - Efecto brillo del sol
+  - Efecto brillo de luna
+  - Cascada de gotas de lluvia
+  - Efecto titilante de estrellas
+  - Desvanecimiento de nubes
+  - Spinner de carga
+  - Transiciones de UI
 
-## Project Structure 📁
+## Estructura del Proyecto 
 
 ```
 src/
-├── App.jsx              # Main component with weather logic
-├── App.css              # All styling and animations
-├── main.jsx             # React entry point
-├── index.css            # Global styles
+├── App.jsx              # Componente principal con lógica de clima
+├── App.css              # Todos los estilos y animaciones
+├── main.jsx             # Punto de entrada de React
+├── index.css            # Estilos globales
 └── componentes/
-    ├── SearchBar.jsx    # City search input
-    └── WeatherCard.jsx  # Weather display card
+    ├── SearchBar.jsx    # Input de búsqueda de ciudad
+    └── WeatherCard.jsx  # Tarjeta de visualización del clima
 ```
 
-## API Integration 🔗
+## Integración con API
 
-Uses OpenWeatherMap 2.5 API:
+Usa la API OpenWeatherMap 2.5:
 - Endpoint: `https://api.openweathermap.org/data/2.5/weather`
-- Parameters: city name, metric units, Spanish language
-- Response fields: temperature, humidity, wind, weather conditions
+- Parámetros: nombre de ciudad, unidades métricas, idioma español
+- Campos de respuesta: temperatura, humedad, viento, condiciones del clima
 
-## Browser Support 🌐
+## Compatibilidad de Navegadores
 
-Works on modern browsers with:
+Funciona en navegadores modernos con:
 - CSS Grid & Flexbox
-- CSS Animations & Filters
+- Animaciones CSS & Filtros
 - Fetch API
-- Local timezone detection
+- Detección de zona horaria local
 
-## Future Enhancements 🔮
+## Mejoras Futuras
 
-- Multi-day forecast
-- Weather alerts
-- Saved favorite cities
-- Custom themes
-- Geolocation support
-- Temperature unit toggle
-
-## License 📜
-
-This project is open source and available for personal and educational use.
-
----
-
-**Built with ❤️ as a React practice project**
+- Pronóstico de varios días
+- Alertas de clima
+- Ciudades favoritas guardadas
+- Temas personalizados
+- Soporte de geolocalización
+- Alternancia de unidades de temperatura
