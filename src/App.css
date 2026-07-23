@@ -1,0 +1,658 @@
+/* ==========================================
+   RESET Y LAYOUT BASE
+   ========================================== */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, sans-serif;
+}
+
+html, body, #root {
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+body {
+  background: #e2e8f0;
+  color: #1e293b;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+.app-viewport {
+  width: 100vw;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: background 0.5s ease;
+}
+
+/* ==========================================
+   ESTILOS DINÁMICOS DÍA / NOCHE (VIEWPORT)
+   ========================================== */
+.app-viewport.bg-day-clear {
+  background: #e2e8f0;
+  color: #1e293b;
+}
+
+/* CREMA SUAVE CUANDO ES 100% SOLEADO */
+.app-viewport.bg-day-sunny-cream {
+  background: linear-gradient(180deg, #faf4ed 0%, #f5ede3 100%);
+  color: #1e293b;
+}
+
+.app-viewport.bg-night-clear {
+  background: #0b0f17;
+  color: #f8fafc;
+}
+
+.app-viewport.rain-night {
+  background: #0a0d14 !important;
+  color: #f8fafc;
+}
+
+/* ESTRUCTURA PRINCIPAL */
+.card-outer-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 440px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: visible !important;
+}
+
+/* ILUSTRACIÓN 3D SOL / LUNA + NUBES + LLUVIA */
+.weather-illustration-container {
+  position: absolute;
+  top: -128px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 260px;
+  height: 180px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Sol Círculo Grande (Día) */
+.sun-behind-element {
+  position: absolute;
+  top: 0;
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  background: linear-gradient(180deg, #ff8c53 0%, #ff6b35 100%);
+  box-shadow: 
+    0 0 50px rgba(255, 107, 53, 0.4),
+    0 0 100px rgba(255, 139, 83, 0.25),
+    0 10px 40px rgba(255, 107, 53, 0.25);
+  transition: all 0.5s ease;
+  z-index: 1;
+  animation: sunGlimmer 2.5s ease-in-out infinite;
+}
+
+@keyframes sunGlimmer {
+  0%, 100% {
+    box-shadow: 
+      0 0 50px rgba(255, 107, 53, 0.4),
+      0 0 100px rgba(255, 139, 83, 0.25),
+      0 10px 40px rgba(255, 107, 53, 0.25);
+  }
+  50% {
+    box-shadow: 
+      0 0 70px rgba(255, 107, 53, 0.6),
+      0 0 130px rgba(255, 139, 83, 0.4),
+      0 10px 40px rgba(255, 107, 53, 0.35);
+  }
+}
+
+/* Luna Círculo Grande (Noche) */
+.moon-behind-element {
+  position: absolute;
+  top: 0;
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #f5f7fa 0%, #d1dce6 100%);
+  box-shadow: 
+    0 0 70px rgba(255, 255, 255, 0.7),
+    0 0 120px rgba(219, 234, 254, 0.5),
+    0 10px 40px rgba(148, 163, 184, 0.3);
+  filter: brightness(1.15);
+  transition: all 0.5s ease;
+  z-index: 1;
+  animation: moonGlow 3s ease-in-out infinite;
+}
+
+@keyframes moonGlow {
+  0%, 100% {
+    box-shadow: 
+      0 0 70px rgba(255, 255, 255, 0.7),
+      0 0 120px rgba(219, 234, 254, 0.5),
+      0 10px 40px rgba(148, 163, 184, 0.3);
+  }
+  50% {
+    box-shadow: 
+      0 0 90px rgba(255, 255, 255, 0.9),
+      0 0 140px rgba(219, 234, 254, 0.6),
+      0 10px 40px rgba(148, 163, 184, 0.4);
+  }
+}
+
+/* ASTRO CLARITO / OPACO (cuando llueve o hay tormenta) */
+.sun-behind-element.astro-dimmed,
+.moon-behind-element.astro-dimmed {
+  opacity: 0.35 !important;
+  filter: saturate(0.5) brightness(0.85) !important;
+  box-shadow: none !important;
+  animation: none !important;
+}
+
+/* LUNA CON LLUVIA (más blanca y visible) */
+.moon-behind-element.moon-rain {
+  opacity: 0.65 !important;
+  filter: brightness(1.1) saturate(1.2) !important;
+  box-shadow:
+    0 0 60px rgba(255, 255, 255, 0.5),
+    0 0 100px rgba(219, 234, 254, 0.3),
+    0 10px 40px rgba(148, 163, 184, 0.2) !important;
+  animation: moonGlow 3s ease-in-out infinite !important;
+}
+
+/* LLUVIA SOBRE EL SOL */
+.rain-over-astro-group {
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 160px;
+  height: 160px;
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-start;
+  z-index: 10;
+  pointer-events: none;
+  overflow: visible;
+}
+
+.rain-drop-line {
+  width: 3.5px;
+  height: 28px;
+  background: linear-gradient(180deg, #3b82f6 0%, #ffffff 100%);
+  border-radius: 4px;
+  box-shadow: 0 0 8px rgba(59, 130, 246, 0.6);
+  animation: dropFallOverAstro 0.75s linear infinite;
+}
+
+@keyframes dropFallOverAstro {
+  0% {
+    transform: translateY(0px);
+    opacity: 0;
+  }
+  30% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(110px);
+    opacity: 0;
+  }
+}
+
+.d1 { animation-delay: 0s; }
+.d2 { animation-delay: 0.15s; }
+.d3 { animation-delay: 0.4s; }
+.d4 { animation-delay: 0.25s; }
+.d5 { animation-delay: 0.55s; }
+
+/* Nubes */
+.cloud-front-element {
+  position: relative;
+  width: 190px;
+  height: 70px;
+  z-index: 2;
+  animation: cloudFadeIn 0.4s ease-out;
+}
+
+@keyframes cloudFadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.cloud-circle {
+  position: absolute;
+  background: #ffffff;
+  border-radius: 50%;
+  box-shadow: 
+    0 10px 20px rgba(0, 0, 0, 0.06),
+    inset -2px -4px 10px rgba(0, 0, 0, 0.03);
+}
+
+.cloud-center {
+  width: 80px;
+  height: 80px;
+  top: -35px;
+  left: 55px;
+  z-index: 3;
+}
+
+.cloud-left {
+  width: 55px;
+  height: 55px;
+  top: -10px;
+  left: 20px;
+  z-index: 2;
+}
+
+.cloud-right {
+  width: 55px;
+  height: 55px;
+  top: -12px;
+  right: 25px;
+  z-index: 1;
+}
+
+/* Nubes adicionales para nubosidad moderada */
+.cloud-extra-left {
+  width: 45px;
+  height: 45px;
+  top: 15px;
+  left: 5px;
+  z-index: 1;
+  opacity: 0.8;
+}
+
+.cloud-extra-right {
+  width: 48px;
+  height: 48px;
+  top: 12px;
+  right: 10px;
+  z-index: 1;
+  opacity: 0.8;
+}
+
+/* Nubes adicionales para muy nuboso */
+.cloud-top-left {
+  width: 50px;
+  height: 50px;
+  top: -25px;
+  left: 15px;
+  z-index: 2;
+  opacity: 0.75;
+}
+
+.cloud-top-right {
+  width: 50px;
+  height: 50px;
+  top: -20px;
+  right: 20px;
+  z-index: 2;
+  opacity: 0.75;
+}
+
+.cloud-bottom-center {
+  width: 65px;
+  height: 65px;
+  top: 25px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1;
+  opacity: 0.7;
+}
+
+/* ESTRELLAS (Noche despejada) */
+.stars-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.star {
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  background: #ffffff;
+  border-radius: 50%;
+  box-shadow: 0 0 3px rgba(255, 255, 255, 0.8);
+  animation: twinkle 3s ease-in-out infinite;
+}
+
+@keyframes twinkle {
+  0%, 100% {
+    opacity: 0.3;
+    box-shadow: 0 0 3px rgba(255, 255, 255, 0.5);
+  }
+  50% {
+    opacity: 0.9;
+    box-shadow: 0 0 6px rgba(255, 255, 255, 0.9);
+  }
+}
+
+.star-1 {
+  top: 15px;
+  left: 20px;
+  animation-delay: 0s;
+}
+
+.star-2 {
+  top: 25px;
+  right: 30px;
+  animation-delay: 0.5s;
+}
+
+.star-3 {
+  top: 40px;
+  left: 40px;
+  animation-delay: 1s;
+}
+
+.star-4 {
+  top: 35px;
+  right: 50px;
+  animation-delay: 1.5s;
+}
+
+.star-5 {
+  top: 55px;
+  left: 25px;
+  animation-delay: 0.3s;
+}
+
+.star-6 {
+  top: 60px;
+  right: 20px;
+  animation-delay: 1.2s;
+}
+
+.star-7 {
+  top: 20px;
+  left: 60%;
+  animation-delay: 0.8s;
+}
+
+.star-8 {
+  top: 50px;
+  left: 70%;
+  animation-delay: 1.8s;
+}
+
+/* TARJETA GLASS */
+.glass-editorial-card {
+  position: relative;
+  z-index: 20;
+  width: 100%;
+  padding: 2.4rem 1.8rem;
+  border-radius: 40px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  background: rgba(255, 255, 255, 0.45);
+  backdrop-filter: blur(25px) saturate(140%);
+  -webkit-backdrop-filter: blur(25px) saturate(140%);
+
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  box-shadow: 
+    0 20px 40px -15px rgba(0, 0, 0, 0.1),
+    inset 0 1px 2px rgba(255, 255, 255, 0.9);
+
+  transition: all 0.4s ease;
+}
+
+.brand-title {
+  font-size: 0.68rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: #8c93a0;
+  font-weight: 600;
+  margin-top: 0.2rem;
+  margin-bottom: 1.4rem;
+  display: block;
+}
+
+.city-name {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #1e293b;
+  margin-bottom: 0.3rem;
+  text-transform: capitalize;
+  transition: color 0.3s ease;
+}
+
+.temp-condition-display {
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
+  gap: 0.6rem;
+  margin-bottom: 0.8rem;
+}
+
+.condition-text {
+  font-size: 1.1rem;
+  color: #475569;
+  transition: color 0.3s ease;
+}
+
+.current-temp {
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: #0f172a;
+  transition: color 0.3s ease;
+}
+
+.weather-metrics-row {
+  font-size: 0.85rem;
+  color: #64748b;
+  transition: color 0.3s ease;
+}
+
+.metric-divider {
+  margin: 0 0.3rem;
+  opacity: 0.5;
+}
+
+/* BUSCADOR Y BOTÓN */
+.search-form {
+  display: flex;
+  gap: 0.6rem;
+  width: 100%;
+  justify-content: center;
+}
+
+.search-input {
+  flex: 1;
+  background: rgba(255, 255, 255, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  padding: 0.8rem 1.3rem;
+  border-radius: 25px;
+  font-size: 0.88rem;
+  color: #334155;
+  outline: none;
+  transition: all 0.2s ease;
+}
+
+.search-input::placeholder {
+  color: #94a3b8;
+}
+
+.search-input:focus {
+  background: rgba(255, 255, 255, 0.95);
+  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.5);
+}
+
+.search-button {
+  background: #ffffff;
+  color: #1e293b;
+  border: none;
+  padding: 0.8rem 1.5rem;
+  border-radius: 25px;
+  font-weight: 600;
+  font-size: 0.88rem;
+  cursor: pointer;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
+  transition: all 0.2s ease;
+}
+
+.search-button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06);
+}
+
+.weather-content-fade-in {
+  width: 100%;
+  margin-top: 1.8rem;
+  animation: expandDown 0.35s ease-out forwards;
+}
+
+@keyframes expandDown {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* MODO NOCHE */
+.bg-night-clear .glass-editorial-card {
+  background: rgba(15, 23, 42, 0.55);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 
+    0 20px 40px -15px rgba(0, 0, 0, 0.6),
+    inset 0 1px 1px rgba(255, 255, 255, 0.2);
+}
+
+.bg-night-clear .brand-title {
+  color: #94a3b8;
+}
+
+.bg-night-clear .city-name {
+  color: #f8fafc;
+}
+
+.bg-night-clear .condition-text {
+  color: #cbd5e1;
+}
+
+.bg-night-clear .current-temp {
+  color: #ffffff;
+}
+
+.bg-night-clear .weather-metrics-row {
+  color: #94a3b8;
+}
+
+.bg-night-clear .search-input {
+  background: rgba(30, 41, 59, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #f8fafc;
+}
+
+.bg-night-clear .search-input::placeholder {
+  color: #64748b;
+}
+
+.bg-night-clear .search-input:focus {
+  background: rgba(30, 41, 59, 0.95);
+  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.15);
+}
+
+.bg-night-clear .search-button {
+  background: #334155;
+  color: #f8fafc;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+.bg-night-clear .search-button:hover {
+  background: #475569;
+}
+
+/* MODO CREMA (cuando es 100% soleado) */
+.bg-day-sunny-cream .glass-editorial-card {
+  background: rgba(255, 255, 255, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.9);
+}
+
+.bg-day-sunny-cream .brand-title {
+  color: #d4a574;
+}
+
+/* Error y loading */
+.error-message {
+  color: #dc2626;
+  font-size: 0.9rem;
+  margin-top: 1rem;
+  animation: fadeIn 0.3s ease-out;
+}
+
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 1.5rem;
+  animation: fadeIn 0.3s ease-out;
+}
+
+.loading-spinner {
+  width: 32px;
+  height: 32px;
+  border: 3px solid rgba(100, 116, 139, 0.2);
+  border-top: 3px solid #64748b;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.status-message {
+  color: #64748b;
+  font-size: 0.9rem;
+  margin: 0;
+}
+
+.bg-night-clear .loading-spinner {
+  border: 3px solid rgba(148, 163, 184, 0.2);
+  border-top: 3px solid #94a3b8;
+}
+
+.bg-night-clear .status-message {
+  color: #cbd5e1;
+}
