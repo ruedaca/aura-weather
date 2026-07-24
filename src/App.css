@@ -215,7 +215,7 @@ body {
   position: relative;
   width: 190px;
   height: 70px;
-  z-index: 2;
+  z-index: 1;
   animation: cloudFadeIn 0.4s ease-out;
 }
 
@@ -394,7 +394,7 @@ body {
 /* TARJETA GLASS */
 .glass-editorial-card {
   position: relative;
-  z-index: 20;
+  z-index: 100;
   width: 100%;
   padding: 2.4rem 1.8rem;
   border-radius: 40px;

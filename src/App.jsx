@@ -2,7 +2,7 @@ import { useState, useRef } from 'react';
 import WeatherCard from './componentes/WeatherCard';
 import './App.css';
 
-const API_KEY = '8524f684fbef451723846bf5ecda44cd';
+const API_KEY = import.meta.env.VITE_OPENWEATHER_API_KEY;
 
 function App() {
   const [weatherData, setWeatherData] = useState(null);
@@ -18,6 +18,7 @@ function App() {
     setError(null);
 
     try {
+      console.log('API_KEY:', API_KEY);
       const response = await fetch(
         `https://api.openweathermap.org/data/2.5/weather?q=${encodeURIComponent(ciudad)}&units=metric&lang=es&appid=${API_KEY}`
       );
@@ -27,11 +28,13 @@ function App() {
       }
 
       const data = await response.json();
+      console.log('API Response:', data);
       const realTemp = Math.round(data.main.temp);
       const weatherMain = data.weather[0].main.toLowerCase();
+      const weatherIcon = data.weather[0].icon;
 
-      const currentHour = new Date().getHours();
-      const isNighttime = currentHour >= 18 || currentHour < 7;
+      const isNighttime = weatherIcon.endsWith('n');
+      console.log('Weather icon:', weatherIcon, 'Is night:', isNighttime);
       setIsNight(isNighttime);
 
       const formattedCity = ciudad.trim().charAt(0).toUpperCase() + ciudad.trim().slice(1).toLowerCase();
