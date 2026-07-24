@@ -31,8 +31,7 @@ function WeatherCard({ weatherData, onSearch, isNight, isLoading, error, searchB
   const moderatelyCloudy = cloudiness > 40;
 
   return (
-    <div className="card-outer-wrapper">
-
+    <>
       {/* ILUSTRACIÓN 3D DINÁMICA (SOL / LUNA + NUBES + LLUVIA + ESTRELLAS) */}
       <div className="weather-illustration-container">
 
@@ -124,7 +123,7 @@ function WeatherCard({ weatherData, onSearch, isNight, isLoading, error, searchB
         )}
       </div>
 
-    </div>
+    </>
   );
 }
 
