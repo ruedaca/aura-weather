@@ -28,13 +28,13 @@ function App() {
       }
 
       const data = await response.json();
-      console.log('API Response:', data);
       const realTemp = Math.round(data.main.temp);
       const weatherMain = data.weather[0].main.toLowerCase();
-      const weatherIcon = data.weather[0].icon;
 
-      const isNighttime = weatherIcon.endsWith('n');
-      console.log('Weather icon:', weatherIcon, 'Is night:', isNighttime);
+      const currentTime = data.dt;
+      const sunrise = data.sys.sunrise;
+      const sunset = data.sys.sunset;
+      const isNighttime = currentTime < sunrise || currentTime > sunset;
       setIsNight(isNighttime);
 
       const formattedCity = ciudad.trim().charAt(0).toUpperCase() + ciudad.trim().slice(1).toLowerCase();
