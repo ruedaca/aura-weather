@@ -35,6 +35,17 @@ function App() {
       const sunrise = data.sys.sunrise;
       const sunset = data.sys.sunset;
       const isNighttime = currentTime < sunrise || currentTime > sunset;
+
+      console.log('Weather API Response:', {
+        city: data.name,
+        currentTime,
+        sunrise,
+        sunset,
+        isNighttime,
+        weatherMain,
+        cloudiness: data.clouds.all
+      });
+
       setIsNight(isNighttime);
 
       const formattedCity = ciudad.trim().charAt(0).toUpperCase() + ciudad.trim().slice(1).toLowerCase();
